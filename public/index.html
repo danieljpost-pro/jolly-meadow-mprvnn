@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#000000" />
+    <!--
+      manifest.json provides metadata used when your web app is added to the
+      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>Daniel J. Post's Resume, as a React App</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    />
+    <style>
+      .container {
+        left: 50%;
+        margin: auto -2em;
+        position: absolute;
+        top: 50%;
+      }
+      h1 {
+        font-size: 3em;
+        text-align: center;
+        top: 25%;
+      }
+      .progressContainer {
+        position: relative;
+        top: 60px;
+        margin: auto;
+        padding: 0;
+        width: 33%;
+      }
+      #progressBar {
+        width: 100%;
+      }
+      .swing div {
+        border-radius: 50%;
+        float: left;
+        height: 1em;
+        width: 1em;
+      }
+      .swing div:first-of-type {
+        background: radial-gradient(circle at top, #fbb 0%, #800 50%);
+      }
+      .swing div {
+        background: radial-gradient(circle at top, #bfb 0%, #080 50%);
+      }
+      .swing div:last-of-type {
+        background: radial-gradient(circle at top, #bbf 0%, #008 50%);
+      }
+      .shadow {
+        clear: left;
+        padding-top: 0.4em;
+      }
+      .shadow div {
+        filter: blur(1px);
+        float: left;
+        width: 1em;
+        height: 0.25em;
+        border-radius: 50%;
+        background: #898;
+      }
+      .shadow .shadow-l {
+        background: #200;
+      }
+      .shadow .shadow-r {
+        background: #002;
+      }
+      @keyframes ball-l {
+        0%,
+        50% {
+          transform: rotate(0) translateX(0);
+        }
+        100% {
+          transform: rotate(50deg) translateX(-2.5em);
+        }
+      }
+      @keyframes ball-r {
+        0% {
+          transform: rotate(-50deg) translateX(2.5em);
+        }
+        50%,
+        100% {
+          transform: rotate(0) translateX(0);
+        }
+      }
+      @keyframes shadow-l-n {
+        0%,
+        50% {
+          opacity: 0.5;
+          transform: translateX(0);
+        }
+        100% {
+          opacity: 0.125;
+          transform: translateX(-1.75em);
+        }
+      }
+      @keyframes shadow-r-n {
+        0% {
+          opacity: 0.125;
+          transform: translateX(1.75em);
+        }
+        50%,
+        100% {
+          opacity: 0.5;
+          transform: translateX(0);
+        }
+      }
+      .swing-l {
+        animation: ball-l 0.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite
+          alternate;
+      }
+      .swing-r {
+        animation: ball-r 0.5s cubic-bezier(0.55, 0.055, 0.675, 0.19) infinite
+          alternate;
+      }
+      .shadow-l {
+        animation: shadow-l-n 0.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite
+          alternate;
+      }
+      .shadow-r {
+        animation: shadow-r-n 0.5s cubic-bezier(0.55, 0.055, 0.675, 0.19)
+          infinite alternate;
+      }
+
+      #root {
+        font-family: "Ubuntu", sans-serif;
+      }
+      #zinger > span.dbg {
+        display: none;
+      }
+
+      /* cyrillic-ext */
+      @font-face {
+        font-family: "Ubuntu";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/ubuntu/v15/4iCs6KVjbNBYlgoKcg72nU6AF7xm.woff2)
+          format("woff2");
+        unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF,
+          U+A640-A69F, U+FE2E-FE2F;
+      }
+      /* cyrillic */
+      @font-face {
+        font-family: "Ubuntu";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/ubuntu/v15/4iCs6KVjbNBYlgoKew72nU6AF7xm.woff2)
+          format("woff2");
+        unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+      }
+      /* greek-ext */
+      @font-face {
+        font-family: "Ubuntu";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/ubuntu/v15/4iCs6KVjbNBYlgoKcw72nU6AF7xm.woff2)
+          format("woff2");
+        unicode-range: U+1F00-1FFF;
+      }
+      /* greek */
+      @font-face {
+        font-family: "Ubuntu";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/ubuntu/v15/4iCs6KVjbNBYlgoKfA72nU6AF7xm.woff2)
+          format("woff2");
+        unicode-range: U+0370-03FF;
+      }
+      /* latin-ext */
+      @font-face {
+        font-family: "Ubuntu";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/ubuntu/v15/4iCs6KVjbNBYlgoKcQ72nU6AF7xm.woff2)
+          format("woff2");
+        unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+          U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      /* latin */
+      @font-face {
+        font-family: "Ubuntu";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/ubuntu/v15/4iCs6KVjbNBYlgoKfw72nU6AFw.woff2)
+          format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+          U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+          U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      /* latin-ext */
+      @font-face {
+        font-family: "Oxygen Mono";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/oxygenmono/v8/h0GsssGg9FxgDgCjLeAd7hjWx-6tPUUvkdU.woff2)
+          format("woff2");
+        unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+          U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      /* latin */
+      @font-face {
+        font-family: "Oxygen Mono";
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(https://fonts.gstatic.com/s/oxygenmono/v8/h0GsssGg9FxgDgCjLeAd7hjYx-6tPUUv.woff2)
+          format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+          U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+          U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+    </style>
+  </head>
+
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div id="root">
+      <div id="resume">
+        <span id="zinger"><span>Loading...</span></span>
+        <div
+          aria-busy="true"
+          aria-label="Loading..."
+          role="progressbar"
+          class="container"
+          style="outline: 0px solid black;"
+        >
+          <div class="swing">
+            <div class="swing-l"></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div class="swing-r"></div>
+          </div>
+          <div class="shadow">
+            <div class="shadow-l"></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div class="shadow-r"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>
